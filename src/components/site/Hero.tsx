@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TriTitle } from "@/components/site/DeckTitle";
 import { DoodleField, SpeechBubbles, Sparkle } from "@/components/site/Doodles";
 import { pill } from "@/components/site/Pill";
-import { Link } from "@/i18n/navigation";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 
 export function Hero({
   eyebrow,
@@ -61,10 +61,15 @@ export function Hero({
 
             <Reveal delay={0.24}>
               <div className="mt-9 flex flex-wrap items-center gap-4">
-                <Link href="/lessons" className={pill({ tone: "pink", size: "lg" })}>
+                <TrackedLink
+                  href="/lessons"
+                  event="cta_click"
+                  eventParams={{ location: "hero", target: "lessons" }}
+                  className={pill({ tone: "pink", size: "lg" })}
+                >
                   {ctaText}
                   <ArrowRight className="transition-transform group-hover/pill:translate-x-1" />
-                </Link>
+                </TrackedLink>
                 <TelegramCta source="hero" label={secondaryCtaText} tone="cream" size="lg" />
               </div>
             </Reveal>

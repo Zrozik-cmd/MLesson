@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { pill } from "@/components/site/Pill";
 import { Sparkle } from "@/components/site/Doodles";
+import { track } from "@/lib/gtag";
 import { cn } from "@/lib/utils";
 
 /*
@@ -208,7 +209,10 @@ export function LessonPdf({
       ) : (
         <button
           type="button"
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            track("deck_open", { title });
+            setOpen(true);
+          }}
           aria-label={labels.open}
           className="group relative block aspect-[16/10] w-full overflow-hidden rounded-[1.5rem] border-2 border-ink bg-brown shadow-[6px_6px_0_var(--ink)] transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0_var(--pink)]"
         >
@@ -252,7 +256,10 @@ export function LessonPdf({
         {showDeck && canFullscreen ? (
           <button
             type="button"
-            onClick={() => frameRef.current?.requestFullscreen?.()}
+            onClick={() => {
+              track("deck_fullscreen", { title });
+              frameRef.current?.requestFullscreen?.();
+            }}
             className={pill({ tone: "outline", size: "sm" })}
           >
             <Maximize2 />
@@ -263,6 +270,7 @@ export function LessonPdf({
           href={pdfUrl}
           target="_blank"
           rel="noreferrer noopener"
+          onClick={() => track("deck_open_tab", { title })}
           className={pill({ tone: "outline", size: "sm" })}
         >
           <ExternalLink />
@@ -271,6 +279,7 @@ export function LessonPdf({
         <a
           href={pdfUrl}
           download={fileName}
+          onClick={() => track("deck_download", { title })}
           className={pill({ tone: "outline", size: "sm" })}
         >
           <Download />

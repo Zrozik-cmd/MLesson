@@ -43,8 +43,12 @@ runtime.
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain` |
 | `SEED_ADMIN_EMAIL` | admin login (only needed if you run the seed) |
 | `SEED_ADMIN_PASSWORD` | admin password (only needed if you run the seed) |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 ID, e.g. `G-XXXXXXXXXX` (optional) |
 
 `PORT` is injected by the platform; `next start` picks it up on its own.
+
+`NEXT_PUBLIC_GA_ID` is inlined at build time like the site URL, so set it
+before the build and redeploy after changing it.
 
 ## 3. Persistent volume
 

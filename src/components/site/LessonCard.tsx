@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { ArrowRight, Clock, FileText, Play } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { formatLessonNumber } from "@/lib/lessons";
 import type { ResolvedLessonSummary } from "@/lib/data";
 
@@ -28,7 +28,12 @@ export async function LessonCard({
   const number = formatLessonNumber(lesson.order ?? index);
 
   return (
-    <Link href={`/lessons/${lesson.slug}`} className="group block h-full">
+    <TrackedLink
+      href={`/lessons/${lesson.slug}`}
+      event="lesson_open"
+      eventParams={{ slug: lesson.slug, level: lesson.level, position: index + 1 }}
+      className="group block h-full"
+    >
       <article
         className={`flex h-full flex-col overflow-hidden rounded-[1.75rem] border-2 border-ink bg-card shadow-[5px_5px_0_var(--ink)] transition-all duration-200 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1 ${SHADOWS[index % SHADOWS.length]}`}
       >
@@ -108,6 +113,6 @@ export async function LessonCard({
           </span>
         </div>
       </article>
-    </Link>
+    </TrackedLink>
   );
 }

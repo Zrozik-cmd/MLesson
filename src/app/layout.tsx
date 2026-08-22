@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, Nunito_Sans, Caveat } from "next/font/google";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { getSiteSettings } from "@/lib/settings";
 import { toDbLocale } from "@/lib/i18n-fallback";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
         <Toaster />
+        <GoogleAnalytics />
       </body>
     </html>
   );

@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Check, Globe } from "lucide-react";
+import { track } from "@/lib/gtag";
 import { cn } from "@/lib/utils";
 
 const NATIVE_NAMES: Record<AppLocale, string> = {
@@ -30,6 +31,7 @@ export function LanguageSwitcher({
   const router = useRouter();
 
   const switchTo = (next: AppLocale) => {
+    track("language_switch", { from: locale, to: next });
     router.replace(pathname, { locale: next });
   };
 

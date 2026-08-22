@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { TrackedLink } from "@/components/analytics/TrackedLink";
 import { Hero, HeroMarquee } from "@/components/site/Hero";
 import { AuthorSection } from "@/components/site/AuthorSection";
 import { ValueProposition } from "@/components/site/ValueProposition";
@@ -90,10 +90,15 @@ export default async function HomePage({
           </div>
 
           <div className="mt-14 flex justify-center">
-            <Link href="/lessons" className={pill({ tone: "ink", size: "lg" })}>
+            <TrackedLink
+              href="/lessons"
+              event="cta_click"
+              eventParams={{ location: "home_trials", target: "lessons" }}
+              className={pill({ tone: "ink", size: "lg" })}
+            >
               {tCommon("seeAllLessons")}
               <ArrowRight className="transition-transform group-hover/pill:translate-x-1" />
-            </Link>
+            </TrackedLink>
           </div>
         </Container>
       </Section>
