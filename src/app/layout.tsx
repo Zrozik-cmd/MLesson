@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Nunito_Sans, Caveat } from "next/font/google";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
 import { getSiteSettings } from "@/lib/settings";
 import { toDbLocale } from "@/lib/i18n-fallback";
@@ -29,17 +29,20 @@ const caveat = Caveat({
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const settings = await getSiteSettings(toDbLocale(locale as "en" | "ru" | "uk"));
+  // The homepage gets a real, localised SEO title; subpages keep the
+  // "<page> — M Lesson" template.
+  const t = await getTranslations("meta");
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: settings.siteName,
+      default: t("title"),
       template: `%s — ${settings.siteName}`,
     },
     description: settings.siteDescription,
     openGraph: {
-      title: settings.siteName,
+      title: t("title"),
       description: settings.siteDescription,
       url: siteUrl,
       siteName: settings.siteName,
@@ -47,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: "summary_large_image",
-      title: settings.siteName,
+      title: t("title"),
       description: settings.siteDescription,
     },
   };
