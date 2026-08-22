@@ -25,7 +25,7 @@ function languageAlternates(pathSuffix: string, siteUrl: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const staticRoutes: MetadataRoute.Sitemap = STATIC_PATHS.flatMap(({ path, priority }) =>
     routing.locales.map((locale) => ({

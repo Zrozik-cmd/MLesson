@@ -21,7 +21,7 @@ COPY . .
 
 # Next inlines NEXT_PUBLIC_* at build time, so the public URL has to be known
 # here — setting it only at runtime is too late.
-ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 RUN npm run build
 

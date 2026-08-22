@@ -29,7 +29,7 @@ const caveat = Caveat({
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const settings = await getSiteSettings(toDbLocale(locale as "en" | "ru" | "uk"));
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   return {
     metadataBase: new URL(siteUrl),
