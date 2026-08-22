@@ -124,12 +124,15 @@ export default async function LessonPage({
           <div className="mt-9">
             <LessonPdf
               pdfUrl={lesson.pdfUrl}
+              pdfPages={lesson.pdfPages}
               thumbnailUrl={lesson.thumbnailUrl}
               title={lesson.title}
               labels={{
                 open: t("openPdf"),
                 openInNewTab: t("openInNewTab"),
                 fullscreen: t("fullscreen"),
+                prevSlide: t("prevSlide"),
+                nextSlide: t("nextSlide"),
                 download: t("downloadPdf"),
                 hint: t("pdfHint"),
                 comingSoon: t("pdfComingSoon"),

@@ -13,6 +13,7 @@
 import { copyFile, mkdir } from "fs/promises";
 import path from "path";
 import { PrismaClient, type Locale } from "@prisma/client";
+import { renderPdfPages } from "../src/lib/pdf";
 
 const prisma = new PrismaClient();
 
@@ -227,11 +228,13 @@ async function restoreLesson() {
     await prisma.lesson.updateMany({ data: { order: { increment: 1 } } });
   }
 
+  const pdfUrl = `/uploads/${ASSETS[0].to}`;
   const base = {
     level: "BEGINNER" as const,
     duration: 60,
     thumbnailUrl: `/uploads/${ASSETS[1].to}`,
-    pdfUrl: `/uploads/${ASSETS[0].to}`,
+    pdfUrl,
+    pdfPages: await renderPdfPages(pdfUrl),
     isTrial: true,
     isPublished: true,
     order: 0,

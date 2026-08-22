@@ -80,6 +80,8 @@
     "openPdf": "Open the lesson",
     "openInNewTab": "Open in a new tab",
     "fullscreen": "Fullscreen",
+    "prevSlide": "Previous slide",
+    "nextSlide": "Next slide",
     "downloadPdf": "Download PDF",
     "pdfHint": "The full lesson deck — read it here or take it with you.",
     "pdfComingSoon": "The lesson material is on its way."

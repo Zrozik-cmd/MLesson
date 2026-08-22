@@ -50,6 +50,9 @@ model Lesson {
   thumbnailUrl String?
   videoUrl     String?
   pdfUrl       String?
+  /// Deck pages rendered to images so the viewer works everywhere, iOS
+  /// included — its PDF embed shows only the first page.
+  pdfPages     String[] @default([])
   isTrial      Boolean      @default(true)
   isPublished  Boolean      @default(false)
   order        Int          @default(0)

@@ -25,6 +25,7 @@ export type ResolvedLessonSummary = {
 export type ResolvedLesson = ResolvedLessonSummary & {
   videoUrl: string | null;
   pdfUrl: string | null;
+  pdfPages: string[];
   isTrial: boolean;
   isPublished: boolean;
   description: string;
@@ -49,6 +50,7 @@ type LessonWithRelations = {
   thumbnailUrl: string | null;
   videoUrl: string | null;
   pdfUrl: string | null;
+  pdfPages: string[];
   isTrial: boolean;
   isPublished: boolean;
   order: number;
@@ -101,6 +103,7 @@ function resolveLesson(
     thumbnailUrl: lesson.thumbnailUrl,
     videoUrl: lesson.videoUrl,
     pdfUrl: lesson.pdfUrl,
+    pdfPages: lesson.pdfPages,
     isTrial: lesson.isTrial,
     isPublished: lesson.isPublished,
     order: lesson.order,

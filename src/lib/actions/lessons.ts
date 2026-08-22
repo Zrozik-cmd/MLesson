@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/require-admin";
+import { renderPdfPages } from "@/lib/pdf";
 import {
   lessonBaseFormSchema,
   lessonTranslationFormSchema,
@@ -39,6 +40,7 @@ export async function createLesson(
       thumbnailUrl: baseData.thumbnailUrl || null,
       videoUrl: baseData.videoUrl || null,
       pdfUrl: baseData.pdfUrl || null,
+      pdfPages: await renderPdfPages(baseData.pdfUrl),
       isTrial: baseData.isTrial,
       isPublished: baseData.isPublished,
       order: baseData.order,
@@ -68,6 +70,18 @@ export async function updateLessonBase(id: string, base: LessonBaseFormValues) {
   await requireAdmin();
   const baseData = lessonBaseFormSchema.parse(base);
 
+  // Rendering a deck takes a few seconds, so only redo it when the file
+  // actually changed.
+  const current = await prisma.lesson.findUnique({
+    where: { id },
+    select: { pdfUrl: true, pdfPages: true },
+  });
+  const pdfUrl = baseData.pdfUrl || null;
+  const pdfPages =
+    pdfUrl && pdfUrl === current?.pdfUrl
+      ? current.pdfPages
+      : await renderPdfPages(pdfUrl);
+
   await prisma.$transaction([
     prisma.lessonTag.deleteMany({ where: { lessonId: id } }),
     prisma.lesson.update({
@@ -78,7 +92,8 @@ export async function updateLessonBase(id: string, base: LessonBaseFormValues) {
         duration: baseData.duration,
         thumbnailUrl: baseData.thumbnailUrl || null,
         videoUrl: baseData.videoUrl || null,
-        pdfUrl: baseData.pdfUrl || null,
+        pdfUrl,
+        pdfPages,
         isTrial: baseData.isTrial,
         isPublished: baseData.isPublished,
         order: baseData.order,
