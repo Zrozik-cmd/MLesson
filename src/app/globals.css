@@ -340,6 +340,41 @@
     }
   }
 
+  /* Children arrive one after another — used by the mobile menu and the
+     language dropdown so panels unfold instead of snapping open. */
+  .stagger > * {
+    animation: ml-rise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .stagger > *:nth-child(1) {
+    animation-delay: 0.06s;
+  }
+  .stagger > *:nth-child(2) {
+    animation-delay: 0.11s;
+  }
+  .stagger > *:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  .stagger > *:nth-child(4) {
+    animation-delay: 0.21s;
+  }
+  .stagger > *:nth-child(5) {
+    animation-delay: 0.26s;
+  }
+  .stagger > *:nth-child(6) {
+    animation-delay: 0.31s;
+  }
+
+  @keyframes ml-rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes ml-reveal {
     from {
       opacity: 0;

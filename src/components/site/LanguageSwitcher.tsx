@@ -46,7 +46,7 @@ export function LanguageSwitcher({
               type="button"
               onClick={() => switchTo(code)}
               className={cn(
-                "rounded-full border-2 px-3.5 py-1.5 font-display text-sm font-bold transition-all",
+                "rounded-full border-2 px-3.5 py-1.5 font-display text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0",
                 code === locale
                   ? "border-ink bg-ink text-cream shadow-[3px_3px_0_var(--brown-soft)]"
                   : "border-ink/15 bg-card text-muted-foreground hover:border-ink hover:text-ink",
@@ -72,7 +72,10 @@ export function LanguageSwitcher({
           {locale.toUpperCase()}
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="rounded-2xl border-2 border-ink/15">
+      <DropdownMenuContent
+        align="end"
+        className="stagger rounded-2xl border-2 border-ink/15 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      >
         {LOCALES.map((code) => (
           <DropdownMenuItem
             key={code}

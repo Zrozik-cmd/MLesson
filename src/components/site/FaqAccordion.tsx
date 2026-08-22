@@ -34,12 +34,12 @@ export function FaqAccordion({
         <AccordionItem
           key={faq.id}
           value={faq.id}
-          className="mb-4 rounded-[1.5rem] border-2 border-ink/12 bg-card px-5 not-last:border-b-2 sm:px-6"
+          className="group/item mb-4 rounded-[1.5rem] border-2 border-ink/12 bg-card px-5 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] not-last:border-b-2 hover:border-ink/25 data-[state=open]:-translate-y-0.5 data-[state=open]:border-ink data-[state=open]:shadow-[4px_4px_0_var(--ink)] sm:px-6"
         >
           <AccordionTrigger className="gap-4 py-5 text-left hover:no-underline **:data-[slot=accordion-trigger-icon]:text-pink">
             <span className="flex items-start gap-3.5">
               <span
-                className={`mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full font-display text-xs font-black ${BADGES[index % BADGES.length]}`}
+                className={`mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full font-display text-xs font-black transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-data-[state=open]/item:scale-110 group-data-[state=open]/item:rotate-6 ${BADGES[index % BADGES.length]}`}
               >
                 {index + 1}
               </span>
