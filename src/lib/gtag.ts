@@ -1,11 +1,16 @@
 /**
  * Google Analytics 4.
  *
- * The measurement ID comes from the environment so local work and previews
- * don't report into the production property — leave it unset and every call
- * here quietly does nothing.
+ * The property's measurement ID is baked in so a deploy needs no extra
+ * configuration, but tracking only runs in production — development and
+ * preview builds would otherwise report into the live property. Set
+ * NEXT_PUBLIC_GA_ID to point a given environment somewhere else.
  */
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const MEASUREMENT_ID = "G-QEWC1EBSH7";
+
+export const GA_ID =
+  process.env.NEXT_PUBLIC_GA_ID ||
+  (process.env.NODE_ENV === "production" ? MEASUREMENT_ID : "");
 
 type GtagParams = Record<string, string | number | boolean | undefined>;
 

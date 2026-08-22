@@ -43,12 +43,14 @@ runtime.
 | `NEXT_PUBLIC_SITE_URL` | `https://your-domain` |
 | `SEED_ADMIN_EMAIL` | admin login (only needed if you run the seed) |
 | `SEED_ADMIN_PASSWORD` | admin password (only needed if you run the seed) |
-| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 ID, e.g. `G-XXXXXXXXXX` (optional) |
+| `NEXT_PUBLIC_GA_ID` | optional — overrides the built-in Google Analytics ID |
 
 `PORT` is injected by the platform; `next start` picks it up on its own.
 
-`NEXT_PUBLIC_GA_ID` is inlined at build time like the site URL, so set it
-before the build and redeploy after changing it.
+Analytics needs no variable: the measurement ID ships in the code and only
+fires in production builds. `NEXT_PUBLIC_GA_ID` overrides it, and like the
+site URL it is inlined at build time — so set it before the build. A wrong
+value silently stops collection, so leave it unset unless you mean it.
 
 ## 3. Persistent volume
 
