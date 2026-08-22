@@ -1,0 +1,207 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+}
+
+enum Locale {
+  EN
+  RU
+  UK
+}
+
+enum LessonLevel {
+  BEGINNER
+  ELEMENTARY
+  INTERMEDIATE
+  UPPER_INTERMEDIATE
+  ADVANCED
+}
+
+enum AnalyticsEventType {
+  PAGE_VIEW
+  LESSON_VIEW
+  TELEGRAM_CLICK
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String
+  role          Role     @default(ADMIN)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+/// Locale-independent lesson record. All display copy lives on LessonTranslation.
+model Lesson {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  level        LessonLevel  @default(BEGINNER)
+  duration     Int
+  thumbnailUrl String?
+  videoUrl     String?
+  pdfUrl       String?
+  isTrial      Boolean      @default(true)
+  isPublished  Boolean      @default(false)
+  order        Int          @default(0)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  translations LessonTranslation[]
+  tags         LessonTag[]
+
+  @@index([isPublished, isTrial])
+  @@index([order])
+}
+
+/// Per-locale lesson copy. `slug` is an optional override of Lesson.slug for
+/// this locale — most lessons won't need one (see spec §47).
+model LessonTranslation {
+  id               String   @id @default(cuid())
+  lessonId         String
+  locale           Locale
+  slug             String?
+  title            String
+  shortDescription String
+  description      String
+  content          String?
+  learningOutcomes String[] @default([])
+  vocabulary       String[] @default([])
+  seoTitle         String?
+  seoDescription   String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([lessonId, locale])
+  @@unique([locale, slug])
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  translations TagTranslation[]
+  lessons      LessonTag[]
+}
+
+/// `slug` is an optional per-locale override of Tag.slug (see spec §51).
+model TagTranslation {
+  id          String   @id @default(cuid())
+  tagId       String
+  locale      Locale
+  slug        String?
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tag Tag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([tagId, locale])
+  @@unique([locale, slug])
+}
+
+model LessonTag {
+  lessonId String
+  tagId    String
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([lessonId, tagId])
+}
+
+/// Single-row table for content that isn't locale- or lesson-specific.
+model SiteSettings {
+  id             String  @id @default(cuid())
+  authorName     String  @default("")
+  authorPhotoUrl String?
+  telegramUrl    String  @default("")
+  siteName       String  @default("M Lesson")
+
+  updatedAt DateTime @updatedAt
+
+  translations SiteSettingsTranslation[]
+}
+
+model SiteSettingsTranslation {
+  id                   String   @id @default(cuid())
+  siteSettingsId       String
+  locale               Locale
+  heroEyebrow          String   @default("")
+  heroHeadline         String   @default("")
+  heroDescription      String   @default("")
+  heroCtaText          String   @default("")
+  heroSecondaryCtaText String   @default("")
+  authorBio            String   @default("")
+  authorShortBio       String   @default("")
+  authorExperience     String   @default("")
+  authorMetrics        Json?
+  siteDescription      String   @default("")
+  updatedAt            DateTime @updatedAt
+
+  siteSettings SiteSettings @relation(fields: [siteSettingsId], references: [id], onDelete: Cascade)
+
+  @@unique([siteSettingsId, locale])
+}
+
+model Faq {
+  id          String   @id @default(cuid())
+  order       Int      @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  translations FaqTranslation[]
+
+  @@index([order])
+}
+
+model FaqTranslation {
+  id        String   @id @default(cuid())
+  faqId     String
+  locale    Locale
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  faq Faq @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@unique([faqId, locale])
+}
+
+model SocialLink {
+  id        String   @id @default(cuid())
+  label     String
+  url       String
+  icon      String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model AnalyticsEvent {
+  id        String             @id @default(cuid())
+  type      AnalyticsEventType
+  source    String?
+  metadata  Json?
+  createdAt DateTime           @default(now())
+
+  @@index([type, createdAt])
+}

@@ -1,0 +1,386 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-nunito-sans);
+  --font-display: var(--font-nunito);
+  --font-hand: var(--font-caveat);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* M Lesson brand palette — pulled straight from the lesson decks. */
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-brown: var(--brown);
+  --color-brown-soft: var(--brown-soft);
+  --color-gold: var(--gold);
+  --color-mint: var(--mint);
+  --color-rose: var(--rose);
+  --color-steel: var(--steel);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.6);
+  --radius-2xl: calc(var(--radius) * 2.2);
+}
+
+/*
+  M Lesson design tokens.
+
+  The palette is lifted from the lesson slide decks: warm cream ground,
+  espresso ink, magenta as the loud accent, brown as the quiet one, and
+  gold / mint / rose as playful spot colours. `.section-dark` is an
+  authored espresso contrast block, not a user-toggled theme.
+*/
+:root {
+  --cream: #fdf4ec;
+  --cream-deep: #f8e7d8;
+  --ink: #2e2220;
+  --pink: #d62a6e;
+  --pink-soft: #f6c9d6;
+  --brown: #8a5a34;
+  --brown-soft: #c9a184;
+  --gold: #efc85f;
+  --mint: #9fe2d8;
+  --rose: #e9a0a0;
+  --steel: #7c93a3;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+
+  --card: #fffaf5;
+  --card-foreground: var(--ink);
+  --popover: #fffaf5;
+  --popover-foreground: var(--ink);
+
+  --primary: var(--pink);
+  --primary-foreground: #fff7f2;
+  --secondary: #f6e6d9;
+  --secondary-foreground: var(--ink);
+  --muted: #f4e6da;
+  --muted-foreground: #7a625a;
+  --accent: var(--brown);
+  --accent-foreground: #fff7f2;
+  --destructive: #c0392b;
+  --destructive-foreground: #fff7f2;
+
+  --border: #e8d5c4;
+  --input: #e8d5c4;
+  --ring: var(--pink);
+
+  --radius: 0.9rem;
+
+  /* Word-by-word headline accents (see TriTitle). */
+  --title-accent-1: var(--pink);
+  --title-accent-2: var(--brown);
+
+  --sidebar: var(--ink);
+  --sidebar-foreground: #fbeee6;
+  --sidebar-primary: var(--pink);
+  --sidebar-primary-foreground: #fff7f2;
+  --sidebar-accent: #3b2b28;
+  --sidebar-accent-foreground: #fbeee6;
+  --sidebar-border: #46332f;
+  --sidebar-ring: var(--pink);
+}
+
+/* Authored espresso contrast section — the deck's dark slides. */
+.section-dark {
+  --background: var(--ink);
+  --foreground: #fdf4ec;
+  --card: #3a2b27;
+  --card-foreground: #fdf4ec;
+  --popover: #3a2b27;
+  --popover-foreground: #fdf4ec;
+  --primary: #f2478d;
+  --primary-foreground: #2e2220;
+  --secondary: #3d2d29;
+  --secondary-foreground: #fdf4ec;
+  --muted: #3d2d29;
+  --muted-foreground: #c4a99e;
+  --accent: var(--gold);
+  --accent-foreground: #2e2220;
+  --border: rgba(253, 244, 236, 0.14);
+  --input: rgba(253, 244, 236, 0.14);
+  --ring: #f2478d;
+
+  /* Brown goes muddy on espresso — the decks swap it for gold. */
+  --title-accent-1: #f2478d;
+  --title-accent-2: var(--gold);
+
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01";
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+}
+
+@layer utilities {
+  /* ---- Typography ------------------------------------------------- */
+
+  /* Deck headline voice: heavy, rounded, tight, shouty. */
+  .headline {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .headline-soft {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Gold highlighter swipe (the deck's brush marker) ------------ */
+
+  .mark-gold,
+  .mark-pink,
+  .mark-mint {
+    position: relative;
+    display: inline;
+    padding: 0.08em 0.5em 0.16em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .mark-gold {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 64' preserveAspectRatio='none'%3E%3Cpath d='M5.2 16.4C48 7.6 96 12.4 148 8.8c40-2.8 88 1.6 146 6 3.2 12 2.4 26.4.4 38.8-52 8-104 1.6-158 5.6-42 3.2-92-2-131.6-7.2-2.4-11.2-2-24.8.4-35.6Z' fill='%23efc85f'/%3E%3C/svg%3E");
+  }
+
+  .mark-pink {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 64' preserveAspectRatio='none'%3E%3Cpath d='M5.2 16.4C48 7.6 96 12.4 148 8.8c40-2.8 88 1.6 146 6 3.2 12 2.4 26.4.4 38.8-52 8-104 1.6-158 5.6-42 3.2-92-2-131.6-7.2-2.4-11.2-2-24.8.4-35.6Z' fill='%23f6c9d6'/%3E%3C/svg%3E");
+  }
+
+  .mark-mint {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 64' preserveAspectRatio='none'%3E%3Cpath d='M5.2 16.4C48 7.6 96 12.4 148 8.8c40-2.8 88 1.6 146 6 3.2 12 2.4 26.4.4 38.8-52 8-104 1.6-158 5.6-42 3.2-92-2-131.6-7.2-2.4-11.2-2-24.8.4-35.6Z' fill='%239fe2d8'/%3E%3C/svg%3E");
+  }
+
+  /* Espresso ink blob behind a word — the deck's "Homework" banner. */
+  .blob-ink {
+    position: relative;
+    display: inline-block;
+    padding: 0.35em 1.1em 0.45em;
+    color: var(--cream);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='none'%3E%3Cpath d='M6 26C70 8 140 20 208 12c58-7 128 2 186 10 6 22 4 50 1 74-64 14-136 2-208 10-60 6-130-2-181-12-4-22-3-48 0-68Z' fill='%232e2220'/%3E%3C/svg%3E");
+  }
+
+  /* ---- Paper & sticker surfaces ------------------------------------ */
+
+  /* Torn note paper with faint dot grid — deck's "Your task" card. */
+  .paper-note {
+    position: relative;
+    background-color: #f2efe9;
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(46, 34, 32, 0.12) 1px,
+      transparent 0
+    );
+    background-size: 14px 14px;
+    border-radius: 22px 6px 26px 8px;
+    box-shadow: 0 2px 0 rgba(46, 34, 32, 0.08);
+  }
+
+  /* Hard offset shadow — makes cards read like stickers on the page. */
+  .sticker {
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .sticker-pink {
+    border: 2px solid var(--pink);
+    box-shadow: 5px 5px 0 var(--pink);
+  }
+
+  .sticker-soft {
+    border: 2px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--brown-soft);
+  }
+
+  /* Lift on hover — the shadow collapses as the card presses down. */
+  .sticker-lift {
+    transition:
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .sticker-lift:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+
+  .dashed-frame {
+    border: 2px dashed var(--brown-soft);
+    border-radius: 28px;
+  }
+
+  /* ---- Decorative motion ------------------------------------------- */
+
+  @keyframes ml-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--tilt, 0deg));
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--tilt, 0deg));
+    }
+  }
+
+  @keyframes ml-twinkle {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.85) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1) rotate(12deg);
+    }
+  }
+
+  @keyframes ml-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes ml-wobble {
+    0%,
+    100% {
+      transform: rotate(-1.5deg);
+    }
+    50% {
+      transform: rotate(1.5deg);
+    }
+  }
+
+  .animate-float {
+    animation: ml-float 6s ease-in-out infinite;
+  }
+
+  .animate-twinkle {
+    animation: ml-twinkle 3.4s ease-in-out infinite;
+  }
+
+  .animate-marquee {
+    animation: ml-marquee 34s linear infinite;
+  }
+
+  .animate-wobble {
+    animation: ml-wobble 5s ease-in-out infinite;
+  }
+
+  /* ---- Misc --------------------------------------------------------- */
+
+  .tilt-left {
+    transform: rotate(-1.6deg);
+  }
+
+  .tilt-right {
+    transform: rotate(1.6deg);
+  }
+
+  /* Warm paper grain over the whole page — keeps big cream areas alive. */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .underline-doodle {
+    position: relative;
+  }
+
+  .underline-doodle::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: -0.18em;
+    height: 0.22em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8C40 3 70 9 104 5c30-3.5 60 1 94 3' stroke='%23d62a6e' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

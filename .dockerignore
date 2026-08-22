@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+build
+.git
+.gitignore
+
+# Secrets never belong in an image — the platform injects them.
+.env
+.env.*
+!.env.example
+
+# Admin uploads live on a mounted volume in production; baking them into the
+# image would only be shadowed by the mount.
+public/uploads/*
+!public/uploads/.gitkeep
+
+.DS_Store
+*.tsbuildinfo
+.vercel
+.claude
+npm-debug.log*

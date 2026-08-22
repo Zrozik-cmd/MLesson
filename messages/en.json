@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "lessons": "Lessons",
+    "about": "About",
+    "faq": "FAQ",
+    "menu": "Menu",
+    "openMenu": "Open menu"
+  },
+  "common": {
+    "continueInTelegram": "Continue in Telegram",
+    "watchTrialLessons": "Watch the trial lessons",
+    "seeAllLessons": "See all lessons",
+    "watchLesson": "Watch lesson",
+    "backToHomepage": "Back to the homepage",
+    "videoComingSoon": "Video coming soon"
+  },
+  "levels": {
+    "BEGINNER": "Beginner",
+    "ELEMENTARY": "Elementary",
+    "INTERMEDIATE": "Intermediate",
+    "UPPER_INTERMEDIATE": "Upper-Intermediate",
+    "ADVANCED": "Advanced"
+  },
+  "duration": "{minutes, plural, one {# minute} other {# minutes}}",
+  "header": {
+    "languageLabel": "Language"
+  },
+  "footer": {
+    "explore": "Explore",
+    "connect": "Connect",
+    "telegram": "Telegram",
+    "rights": "All rights reserved.",
+    "tagline": "Boutique English lessons — trial lessons on the site, full course in Telegram."
+  },
+  "home": {
+    "teacherEyebrow": "The teacher",
+    "valueEyebrow": "Approach",
+    "valueTitle": "English without unnecessary complexity.",
+    "value1Title": "Clear structure",
+    "value1Description": "Every lesson has a purpose. No filler, no wandering — you always know what you're working toward and why.",
+    "value2Title": "Real English",
+    "value2Description": "The language people actually speak — natural phrasing and rhythm, not textbook sentences no one uses.",
+    "value3Title": "Practice first",
+    "value3Description": "You speak from lesson one. Grammar supports the conversation — it never replaces it.",
+    "value4Title": "Personal approach",
+    "value4Description": "Lessons are shaped around your level, your goals, and your pace — not a fixed, one-size curriculum.",
+    "trialEyebrow": "Trial lessons",
+    "trialTitle": "Start with a lesson.",
+    "trialDescription": "Try the M Lesson format for free — no sign-up, no commitment.",
+    "ctaEyebrow": "Ready when you are",
+    "ctaTitle": "Want the full M Lesson experience?",
+    "ctaDescription": "Lessons, structured practice, and direct feedback continue in a private Telegram channel."
+  },
+  "lessonsPage": {
+    "eyebrow": "Lessons",
+    "title": "All lessons.",
+    "subtitle": "Every trial lesson from M Lesson, in one place. Watch freely, then continue in Telegram when you're ready to go further.",
+    "emptyState": "New lessons are on their way — check back soon.",
+    "ctaDescription": "Watched a few already? The full M Lesson course continues in Telegram.",
+    "filters": {
+      "all": "All",
+      "level": "Level",
+      "tags": "Topic",
+      "trialOnly": "Trial lessons only",
+      "clear": "Clear filters",
+      "noResults": "No lessons match these filters yet."
+    }
+  },
+  "lessonPage": {
+    "whatYoullLearn": "What you'll learn",
+    "usefulVocabulary": "Useful vocabulary",
+    "notes": "Notes",
+    "ctaTitle": "Want the full M Lesson experience?",
+    "ctaDescription": "Structured lessons, real feedback, and steady progress — continue in Telegram.",
+    "fallbackNotice": "This lesson isn't fully translated yet — showing the available version.",
+    "materialsEyebrow": "Lesson material",
+    "openPdf": "Open the lesson",
+    "openInNewTab": "Open in a new tab",
+    "fullscreen": "Fullscreen",
+    "downloadPdf": "Download PDF",
+    "pdfHint": "The full lesson deck — read it here or take it with you.",
+    "pdfComingSoon": "The lesson material is on its way."
+  },
+  "aboutPage": {
+    "eyebrow": "About",
+    "biographyEyebrow": "Biography",
+    "biographyTitle": "How I got here.",
+    "philosophyEyebrow": "Philosophy",
+    "philosophyTitle": "Teaching that respects your time.",
+    "philosophyDescription": "I don't believe in busywork. Every exercise, every correction, every lesson has a reason — and I'll always tell you what it is.",
+    "experienceEyebrow": "Experience",
+    "experienceTitle": "Background.",
+    "ctaTitle": "Ready to start?",
+    "ctaDescription": "Say hello and let's talk about where you're starting from."
+  },
+  "faqPage": {
+    "eyebrow": "FAQ",
+    "title": "Common questions.",
+    "subtitle": "Anything not covered here? Ask directly in Telegram.",
+    "emptyState": "FAQ content is being prepared.",
+    "ctaDescription": "Still have questions? Reach out directly."
+  },
+  "tagPage": {
+    "eyebrow": "Topic",
+    "lessonsInTag": "Lessons in this topic",
+    "emptyState": "No lessons in this topic yet."
+  },
+  "notFound": {
+    "title": "This page wandered off.",
+    "description": "The page you're looking for doesn't exist, or has moved."
+  }
+}
