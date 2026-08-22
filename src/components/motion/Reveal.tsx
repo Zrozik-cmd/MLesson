@@ -1,7 +1,14 @@
-"use client";
+import { cn } from "@/lib/utils";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-
+/**
+ * Fades content in on load.
+ *
+ * This used to be a scroll-triggered framer-motion component, which meant
+ * the server sent every block at `opacity: 0` and the page stayed blank if
+ * the observer never fired — as happened on iPad. A plain CSS animation
+ * can't fail that way: it needs no JavaScript at all, so the content always
+ * ends up visible. `prefers-reduced-motion` is honoured globally.
+ */
 export function Reveal({
   children,
   delay = 0,
@@ -13,23 +20,17 @@ export function Reveal({
   className?: string;
   y?: number;
 }) {
-  const shouldReduceMotion = useReducedMotion();
-
-  const variants: Variants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : y },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={variants}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      className={cn("reveal", className)}
+      style={
+        {
+          "--reveal-delay": `${delay}s`,
+          "--reveal-y": `${y}px`,
+        } as React.CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

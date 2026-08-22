@@ -311,6 +311,17 @@
     }
   }
 
+  @keyframes ml-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(var(--reveal-y, 16px));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes ml-wobble {
     0%,
     100% {
@@ -335,6 +346,13 @@
 
   .animate-wobble {
     animation: ml-wobble 5s ease-in-out infinite;
+  }
+
+  /* `both` matters: the element holds the final state, so content stays
+     visible even when the reduced-motion rule collapses the duration. */
+  .reveal {
+    animation: ml-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0s);
   }
 
   /* ---- Misc --------------------------------------------------------- */
