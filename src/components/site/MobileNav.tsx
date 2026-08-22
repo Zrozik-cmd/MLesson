@@ -54,9 +54,12 @@ export function MobileNav({
         </button>
       </SheetTrigger>
 
+      {/* The stock sheet only travels 40px, which reads as a flicker on a
+          phone — slide the whole panel in from the edge instead, and put a
+          real veil behind it. */}
       <SheetContent
         side="right"
-        className="w-80 border-l-2 border-ink bg-cream duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="w-[85%] max-w-sm border-l-2 border-ink bg-cream p-1 duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-open:slide-in-from-right data-closed:slide-out-to-right [&_[data-slot=sheet-close]]:top-4 [&_[data-slot=sheet-close]]:right-4 [&_[data-slot=sheet-close]]:size-9 [&_[data-slot=sheet-close]]:rounded-full [&_[data-slot=sheet-close]]:border-2 [&_[data-slot=sheet-close]]:border-ink [&_[data-slot=sheet-close]]:bg-cream [&_[data-slot=sheet-close]]:text-ink"
       >
         <SheetHeader>
           <SheetTitle className="headline flex items-center gap-2 text-xl text-ink">

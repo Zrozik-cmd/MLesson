@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Globe } from "lucide-react";
+import { Check, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NATIVE_NAMES: Record<AppLocale, string> = {
@@ -72,20 +72,33 @@ export function LanguageSwitcher({
           {locale.toUpperCase()}
         </button>
       </DropdownMenuTrigger>
+      {/* A sticker card, like the rest of the site — not a system menu. */}
       <DropdownMenuContent
         align="end"
-        className="stagger rounded-2xl border-2 border-ink/15 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        sideOffset={10}
+        className="stagger min-w-44 rounded-2xl border-2 border-ink bg-cream p-1.5 shadow-[4px_4px_0_var(--ink)] ring-0 duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       >
         {LOCALES.map((code) => (
           <DropdownMenuItem
             key={code}
             onSelect={() => switchTo(code)}
             className={cn(
-              "font-display text-sm font-bold",
-              code === locale && "text-pink",
+              "gap-2 rounded-xl px-3 py-2 font-display text-sm font-bold transition-colors",
+              code === locale
+                ? "bg-ink text-cream focus:bg-ink focus:text-cream"
+                : "text-ink focus:bg-secondary focus:text-ink",
             )}
           >
+            <span
+              className={cn(
+                "text-[0.65rem] tracking-wider tabular-nums",
+                code === locale ? "text-cream/60" : "text-brown",
+              )}
+            >
+              {code.toUpperCase()}
+            </span>
             {NATIVE_NAMES[code]}
+            {code === locale ? <Check className="ml-auto size-3.5" /> : null}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
