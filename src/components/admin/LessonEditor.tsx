@@ -25,12 +25,12 @@ export function LessonEditor({
   return (
     <div className="space-y-10">
       <section className="space-y-4">
-        <h2 className="font-display text-lg">Lesson settings</h2>
+        <h2 className="text-sm font-semibold">Lesson settings</h2>
         <LessonBaseForm lesson={lesson} tags={tags} selectedTagIds={selectedTagIds} />
       </section>
 
       <section className="max-w-3xl space-y-4 border-t border-border pt-10">
-        <h2 className="font-display text-lg">Translations</h2>
+        <h2 className="text-sm font-semibold">Translations</h2>
         <Tabs defaultValue="EN">
           <TabsList>
             {localeValues.map((locale) => {

@@ -38,28 +38,29 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="font-display text-2xl">Dashboard</h1>
+        <h1 className="text-xl font-semibold">Dashboard</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           An overview of your lessons and conversion activity.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Hairlines instead of four boxes — the figures do the work. */}
+      <div className="grid grid-cols-2 divide-x divide-y divide-border rounded-lg border border-border bg-card sm:grid-cols-4 sm:divide-y-0">
         <StatTile label="Lessons" value={total} icon={BookOpen} />
-        <StatTile label="Published lessons" value={published} icon={CheckCircle2} />
-        <StatTile label="Draft lessons" value={drafts} icon={FileEdit} />
+        <StatTile label="Published" value={published} icon={CheckCircle2} />
+        <StatTile label="Drafts" value={drafts} icon={FileEdit} />
         <StatTile label="Telegram clicks (30d)" value={telegramClicks} icon={Send} />
       </div>
 
       <div>
         <div className="flex items-center justify-between">
-          <h2 className="font-display text-lg">Recent lessons</h2>
+          <h2 className="text-sm font-semibold">Recent lessons</h2>
           <Link href="/admin/lessons" className="text-sm text-primary hover:underline">
             View all
           </Link>
         </div>
 
-        <div className="mt-4 overflow-hidden rounded-xl border border-border">
+        <div className="mt-3 overflow-hidden rounded-lg border border-border bg-card">
           {recentLessons.length === 0 ? (
             <p className="p-6 text-sm text-muted-foreground">
               No lessons yet.{" "}

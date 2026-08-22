@@ -14,12 +14,12 @@ export default async function AdminLoginPage({
   const { callbackUrl } = await searchParams;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-6">
+    <div className="admin-scope flex min-h-screen items-center justify-center bg-background px-6">
       <div className="w-full max-w-sm">
         <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
           M Lesson
         </p>
-        <h1 className="mt-2 font-display text-3xl">Admin sign in</h1>
+        <h1 className="mt-2 text-2xl font-semibold">Admin sign in</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Sign in to manage lessons, FAQ, and site settings.
         </p>

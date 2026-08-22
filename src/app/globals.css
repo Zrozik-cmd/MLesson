@@ -147,6 +147,35 @@
   color: var(--foreground);
 }
 
+/*
+  The admin is a working surface, not a shopfront: neutral paper, hairline
+  rules, tighter radii, and magenta reserved for the single primary action.
+*/
+.admin-scope {
+  --background: #fbfaf8;
+  --foreground: #211a18;
+
+  --card: #ffffff;
+  --card-foreground: #211a18;
+  --popover: #ffffff;
+  --popover-foreground: #211a18;
+
+  --secondary: #f3f1ee;
+  --secondary-foreground: #211a18;
+  --muted: #f3f1ee;
+  --muted-foreground: #6d6560;
+  --accent: #f3f1ee;
+  --accent-foreground: #211a18;
+
+  --border: #e6e2dd;
+  --input: #e6e2dd;
+
+  --radius: 0.5rem;
+
+  background: var(--background);
+  color: var(--foreground);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

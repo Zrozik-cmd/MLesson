@@ -46,7 +46,7 @@ export function SettingsTranslationForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl space-y-8">
       <section className="space-y-4">
-        <h3 className="font-display text-base">Hero</h3>
+        <h3 className="text-base">Hero</h3>
 
         <div className="space-y-1.5">
           <Label htmlFor={`heroEyebrow-${locale}`}>Eyebrow</Label>
@@ -76,7 +76,7 @@ export function SettingsTranslationForm({
       </section>
 
       <section className="space-y-4">
-        <h3 className="font-display text-base">Author</h3>
+        <h3 className="text-base">Author</h3>
 
         <div className="space-y-1.5">
           <Label htmlFor={`authorShortBio-${locale}`}>Short bio</Label>

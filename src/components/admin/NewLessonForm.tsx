@@ -129,7 +129,7 @@ export function NewLessonForm({
       </p>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">Basic information</h2>
+        <h2 className="text-sm font-semibold">Basic information</h2>
 
         <div className="space-y-1.5">
           <Label htmlFor="title">Title (English)</Label>
@@ -226,7 +226,7 @@ export function NewLessonForm({
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">Media</h2>
+        <h2 className="text-sm font-semibold">Media</h2>
 
         <div className="space-y-1.5">
           <Label>Thumbnail</Label>
@@ -263,7 +263,7 @@ export function NewLessonForm({
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">Content</h2>
+        <h2 className="text-sm font-semibold">Content</h2>
 
         <div className="space-y-1.5">
           <Label htmlFor="learningOutcomes">Learning outcomes</Label>
@@ -284,7 +284,7 @@ export function NewLessonForm({
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">SEO</h2>
+        <h2 className="text-sm font-semibold">SEO</h2>
 
         <div className="space-y-1.5">
           <Label htmlFor="seoTitle">SEO title</Label>
@@ -298,7 +298,7 @@ export function NewLessonForm({
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">Publishing</h2>
+        <h2 className="text-sm font-semibold">Publishing</h2>
 
         <div className="flex items-center gap-3">
           <Controller

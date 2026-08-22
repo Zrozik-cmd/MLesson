@@ -20,7 +20,7 @@ export default async function AdminTagsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-2xl">Tags</h1>
+          <h1 className="text-xl font-semibold">Tags</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Topics lessons can be tagged with — used for filtering and tag landing pages.
           </p>

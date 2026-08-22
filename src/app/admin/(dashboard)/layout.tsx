@@ -14,11 +14,13 @@ export default async function AdminDashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="admin-scope flex min-h-screen">
       <AdminSidebar />
       <div className="flex flex-1 flex-col">
         <AdminHeader email={session.user.email ?? "admin"} />
-        <main className="flex-1 px-6 py-8 sm:px-10">{children}</main>
+        <main className="flex-1 px-6 py-10 sm:px-8">
+          <div className="mx-auto w-full max-w-5xl">{children}</div>
+        </main>
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ export function SocialLinksManager({ links }: { links: SocialLink[] }) {
 
   return (
     <section className="space-y-4">
-      <h2 className="font-display text-lg">Social links</h2>
+      <h2 className="text-sm font-semibold">Social links</h2>
 
       {links.length > 0 ? (
         <ul className="divide-y divide-border rounded-lg border border-border">

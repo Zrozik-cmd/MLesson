@@ -24,7 +24,7 @@ export default async function NewLessonPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-2xl">New lesson</h1>
+        <h1 className="text-xl font-semibold">New lesson</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Fill in the details below and publish when ready.
         </p>

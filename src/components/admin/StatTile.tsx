@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
+/** Numbers first, chrome last — no card, just a labelled figure. */
 export function StatTile({
   label,
   value,
@@ -10,12 +11,12 @@ export function StatTile({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-5">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <Icon className="size-4 text-primary" />
-      </div>
-      <p className="mt-3 font-sans text-3xl font-semibold">{value}</p>
+    <div className="px-5 py-5">
+      <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <Icon className="size-3.5" />
+        {label}
+      </p>
+      <p className="mt-2 text-3xl font-semibold tabular-nums">{value}</p>
     </div>
   );
 }

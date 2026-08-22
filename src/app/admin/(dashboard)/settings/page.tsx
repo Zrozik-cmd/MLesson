@@ -21,14 +21,14 @@ export default async function AdminSettingsPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="font-display text-2xl">Settings</h1>
+        <h1 className="text-xl font-semibold">Settings</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Content shown across the public site — author, hero copy, and Telegram.
         </p>
       </div>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg">General</h2>
+        <h2 className="text-sm font-semibold">General</h2>
         <SettingsBaseForm
           defaultValues={{
             authorName: settings?.authorName ?? "",
@@ -40,7 +40,7 @@ export default async function AdminSettingsPage() {
       </section>
 
       <section className="space-y-4 border-t border-border pt-10">
-        <h2 className="font-display text-lg">Content by language</h2>
+        <h2 className="text-sm font-semibold">Content by language</h2>
         <SettingsEditor translations={settings?.translations ?? []} />
       </section>
 
@@ -49,7 +49,7 @@ export default async function AdminSettingsPage() {
       </section>
 
       <section className="space-y-4 border-t border-border pt-10">
-        <h2 className="font-display text-lg">Account</h2>
+        <h2 className="text-sm font-semibold">Account</h2>
         <PasswordChangeForm email={session.user?.email ?? ""} />
       </section>
     </div>
