@@ -22,5 +22,10 @@ fi
 echo "Applying database migrations..."
 npx prisma migrate deploy
 
+# Decks must be rendered here rather than from the console: only this
+# container has the uploads volume the web process serves from.
+echo "Checking lesson deck pages..."
+npm run --silent db:pages
+
 echo "Starting Next.js..."
 exec npm run start

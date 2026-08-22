@@ -11,6 +11,7 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:restore": "tsx prisma/restore-content.ts",
+    "db:pages": "tsx prisma/render-lesson-pages.ts",
     "db:studio": "prisma studio"
   },
   "prisma": {
