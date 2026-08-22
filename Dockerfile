@@ -30,4 +30,5 @@ EXPOSE 3000
 
 # Migrations run on boot so a fresh database comes up ready. `next start`
 # honours the PORT the platform injects.
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
+RUN chmod +x docker-entrypoint.sh
+CMD ["./docker-entrypoint.sh"]
