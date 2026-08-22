@@ -187,6 +187,10 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+    /* Keep the scrollbar's space reserved. Opening the mobile menu locks
+       scrolling, and without this the bar vanishes, the page widens, and
+       the sticky header — burger button and all — jumps sideways. */
+    scrollbar-gutter: stable;
   }
   ::selection {
     background: var(--gold);
