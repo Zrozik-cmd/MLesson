@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   ChevronLeft,
@@ -137,6 +137,17 @@ export function LessonPdf({
   const [open, setOpen] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
 
+  // iOS Safari has no Fullscreen API outside <video>, so the button would
+  // be a no-op there. Decided after mount to keep the markup stable.
+  const [canFullscreen, setCanFullscreen] = useState(false);
+  useEffect(() => {
+    setCanFullscreen(
+      typeof document !== "undefined" &&
+        document.fullscreenEnabled === true &&
+        typeof frameRef.current?.requestFullscreen === "function",
+    );
+  }, []);
+
   if (!pdfUrl) {
     return (
       <div
@@ -156,11 +167,15 @@ export function LessonPdf({
   const fileName = decodeURIComponent(pdfUrl.split("/").pop() ?? `${title}.pdf`);
   const cover = thumbnailUrl ?? pdfPages[0] ?? null;
 
+  // Only the heavyweight PDF embed is worth hiding behind a tap.
+  const hasSlides = pdfPages.length > 0;
+  const showDeck = hasSlides || open;
+
   return (
     <div className={cn("space-y-4", className)}>
-      {open ? (
+      {showDeck ? (
         <div ref={frameRef}>
-          {pdfPages.length > 0 ? (
+          {hasSlides ? (
             <SlideDeck pages={pdfPages} title={title} labels={labels} />
           ) : (
             <div className="overflow-hidden overscroll-contain rounded-[1.5rem] border-2 border-ink bg-cream shadow-[6px_6px_0_var(--ink)] [contain:paint]">
@@ -232,7 +247,7 @@ export function LessonPdf({
       )}
 
       <div className="flex flex-wrap items-center gap-3">
-        {open ? (
+        {showDeck && canFullscreen ? (
           <button
             type="button"
             onClick={() => frameRef.current?.requestFullscreen?.()}
