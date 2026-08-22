@@ -2,11 +2,13 @@ import Script from "next/script";
 import { GA_ID } from "@/lib/gtag";
 
 /**
- * Loads gtag.js once per document. Page views are sent from
- * PageViewTracker instead of automatically, so client-side navigation
- * between locales and lessons is counted too.
+ * Loads gtag.js once per document.
+ *
+ * The first page view is left to gtag: sending it ourselves from an effect
+ * raced the library's own load and got dropped. PageViewTracker covers the
+ * client-side navigations that follow.
  */
-export function GoogleAnalytics() {
+export function GoogleAnalytics({ locale }: { locale: string }) {
   if (!GA_ID) return null;
 
   return (
@@ -19,7 +21,8 @@ export function GoogleAnalytics() {
         {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${GA_ID}', { send_page_view: false });`}
+gtag('set', 'user_properties', { site_language: '${locale}' });
+gtag('config', '${GA_ID}', { site_language: '${locale}' });`}
       </Script>
     </>
   );

@@ -68,7 +68,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
         <Toaster />
-        <GoogleAnalytics />
+        <GoogleAnalytics locale={locale} />
       </body>
     </html>
   );
