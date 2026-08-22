@@ -19,6 +19,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
+        // An empty password must never authenticate, even if a hash of ""
+        // somehow ends up stored — bcrypt would happily compare them.
+        if (password.length === 0) {
+          return null;
+        }
+
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return null;
 

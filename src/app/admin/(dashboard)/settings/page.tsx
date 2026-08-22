@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { SettingsBaseForm } from "@/components/admin/SettingsBaseForm";
 import { SettingsEditor } from "@/components/admin/SettingsEditor";
 import { SocialLinksManager } from "@/components/admin/SocialLinksManager";
+import { PasswordChangeForm } from "@/components/admin/PasswordChangeForm";
 import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/require-admin";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminSettingsPage() {
-  const [settings, socialLinks] = await Promise.all([
+  const [session, settings, socialLinks] = await Promise.all([
+    requireAdmin(),
     prisma.siteSettings.findFirst({ include: { translations: true } }),
     prisma.socialLink.findMany({ orderBy: { order: "asc" } }),
   ]);
@@ -43,6 +46,11 @@ export default async function AdminSettingsPage() {
 
       <section className="border-t border-border pt-10">
         <SocialLinksManager links={socialLinks} />
+      </section>
+
+      <section className="space-y-4 border-t border-border pt-10">
+        <h2 className="font-display text-lg">Account</h2>
+        <PasswordChangeForm email={session.user?.email ?? ""} />
       </section>
     </div>
   );
