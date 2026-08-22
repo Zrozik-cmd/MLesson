@@ -83,16 +83,18 @@ export function LanguageSwitcher({
             key={code}
             onSelect={() => switchTo(code)}
             className={cn(
-              "gap-2 rounded-xl px-3 py-2 font-display text-sm font-bold transition-colors",
+              "group/item gap-2 rounded-xl px-3 py-2 font-display text-sm font-bold transition-all duration-150",
               code === locale
                 ? "bg-ink text-cream focus:bg-ink focus:text-cream"
-                : "text-ink focus:bg-secondary focus:text-ink",
+                : "text-ink focus:translate-x-0.5 focus:bg-pink-soft/70 focus:text-ink",
             )}
           >
             <span
               className={cn(
-                "text-[0.65rem] tracking-wider tabular-nums",
-                code === locale ? "text-cream/60" : "text-brown",
+                "text-[0.65rem] tracking-wider tabular-nums transition-colors",
+                code === locale
+                  ? "text-cream/60"
+                  : "text-brown group-focus/item:text-pink",
               )}
             >
               {code.toUpperCase()}
