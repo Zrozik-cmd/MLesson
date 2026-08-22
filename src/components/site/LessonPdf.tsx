@@ -84,6 +84,7 @@ function SlideDeck({
               alt={`${title} — ${i + 1}/${pages.length}`}
               fill
               sizes="(min-width: 1024px) 900px, 100vw"
+              quality={90}
               priority={i === 0}
               className="object-contain"
             />
@@ -217,6 +218,7 @@ export function LessonPdf({
               alt={title}
               fill
               sizes="(min-width: 1024px) 900px, 100vw"
+              quality={90}
               className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
             />
           ) : (

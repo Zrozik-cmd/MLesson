@@ -28,6 +28,7 @@ export function AuthorPortrait({
           fill
           priority={priority}
           sizes="(min-width: 1024px) 480px, 90vw"
+          quality={90}
           className="object-cover"
         />
       ) : (

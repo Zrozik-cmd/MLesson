@@ -13,7 +13,7 @@
 import { access } from "fs/promises";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
-import { renderPdfPages } from "../src/lib/pdf";
+import { PAGES_DIR_SUFFIX, renderPdfPages } from "../src/lib/pdf";
 
 const prisma = new PrismaClient();
 
@@ -39,9 +39,10 @@ async function main() {
   for (const lesson of lessons) {
     if (!lesson.pdfUrl) continue;
 
-    // Nothing to do when the recorded pages are actually on disk.
+    // Nothing to do when the recorded pages are on disk and were made with
+    // the current render settings.
     const first = lesson.pdfPages[0];
-    if (first && (await exists(first))) continue;
+    if (first && first.includes(PAGES_DIR_SUFFIX) && (await exists(first))) continue;
 
     if (!(await exists(lesson.pdfUrl))) {
       console.warn(`Skipping ${lesson.slug}: ${lesson.pdfUrl} is missing`);
